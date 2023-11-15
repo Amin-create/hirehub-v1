@@ -4,14 +4,14 @@ import React from 'react'
 // import { contentAbout, ctaDataHome, ourMissionDataAbout, topContentAbout } from '../data';
 
 
-function HomePage() {
+function ManageEmployers() {
     return (
         <main className="bg-main">
             {/* <Header /> */}
             {/* <TopContent data={topContentAbout} /> */}
-            HomePage
+            ManageEmployers
         </main>
     )
 }
 
-export default HomePage
+export default ManageEmployers
