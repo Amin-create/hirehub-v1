@@ -10,14 +10,14 @@ function AdminLayout() {
     };
 
     return (
-        <div className="flex h-screen">
+        <div className="flex h-scree n">
             <Sidebar
                 isSidebarOpen={isSidebarOpen}
                 toggleSidebar={toggleSidebar}
             />
             <div className="flex flex-col flex-1">
                 <Header toggleSidebar={toggleSidebar} />
-                <main className="flex-1 p-4 bg-gray-4">
+                <main className="overflow-y-auto overflow-x-hidden flex-1 bg-gray-9 p-6">
                     <Outlet />
                 </main>
             </div>

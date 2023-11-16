@@ -88,13 +88,13 @@ function Sidebar({ isSidebarOpen, toggleSidebar }) {
     return (
         <aside
             className={`${isSidebarOpen ? 'translate-x-0' : ''} 
-                fixed md:static z-50 w-[264px] h-screen
+                fixed md:sticky top-0 z-50 min-w-[264px] max-w-[264px] h-screen
                 text-black bg-white 
                 -translate-x-full md:translate-x-0 transition-all shadow-md
                 flex flex-col justify-between 
             `}
         >
-            <div className="flex flex-col justify-start h-[88%]">
+            <div className="flex flex-col justify-start h-[86%]">
                 <div className="relative pt-6 pb-6 px-2">
                     <img src={logo} alt="logo" />
                     <span className={`absolute top-[18px] right-[-13px] ${isSidebarOpen ? 'block' : 'hidden'}  md:hidden text-white text-[20px] cursor-pointer border-[5px] border-white rounded-full bg-purple-1`}
@@ -110,7 +110,7 @@ function Sidebar({ isSidebarOpen, toggleSidebar }) {
                     })}
                 </ul>
             </div>
-            <a className='block h-[60px] border-t px-4 pt-2 pb-4'>
+            <a className='block h-[80px] px-4 pt-2 pb-4'>
                 <NavLink
                     to={'/login'}
                     className='flex justify-start items-center gap-x-2 text-gray-6 hover:text-white text-[14px] hover:bg-gradient-to-r hover:from-purple-4 hover:to-purple-3 transition-all rounded-[8px] px-3 py-[10px]'
