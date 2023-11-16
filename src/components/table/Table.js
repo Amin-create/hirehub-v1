@@ -1,7 +1,103 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Icon from '../icon';
+import { Button, InputWithLabel } from '../core';
 
-function Table({ children }) {
+function Table({
+    columns,
+    data,
+    filterBy,
+    actions,
+    onViewClick,
+    onEditClick,
+    onDeleteClick,
+}) {
+    const tableHeading = (col) => {
+        switch (col) {
+            case "createdOn":
+                return "Created On";
+            case "nextPayment":
+                return "Next Payment";
+
+            default:
+                return col;
+        }
+    };
+    const renderTableCell = (td, col) => {
+        if (typeof td === "string") td = td.toLowerCase();
+        if (
+            td === "completed" ||
+            td === "pending" ||
+            td === "inprocess" ||
+            td === "active"
+        )
+            return
+        <>
+            {/* <Core.Badge status={td} /> */}
+            <span>....{td}</span>
+        </>
+            ;
+        if (col.toLowerCase() === "active") return
+
+        <>
+            {/*   <Core.Badge status={"active"} /> */}
+            <span>....{td}</span>
+        </>
+            ;
+        if (col.toLowerCase() === "inactive")
+            return
+
+        <>
+            {/*  <Core.Badge status={"inactive"} /> */}
+            <span>....{td}</span>
+        </>
+            ;
+
+        switch (col) {
+            case "payment":
+                if (td === true) {
+                    return (
+                        <>
+                            {/* <Flex color="green.400" alignItems={"center"} columnGap={"3px"}>
+                            <Icons.BsCheck2 />
+                            <Text color="black">Paid</Text>
+                        </Flex> */}
+                            ...Paid
+                        </>
+                    );
+                }
+                return (
+                    <>
+                        {/* <Flex color="red.500" alignItems={"center"} columnGap={"3px"}>
+                        <Icons.IoMdClose />
+                        <Text color="black">Unpaid</Text>
+                    </Flex> */}
+                        ...Unpaid
+                    </>
+                );
+            // case "status":
+            //     if (td === true) return <ActivityStatus>Active</ActivityStatus>;
+            //     return <ActivityStatus>Inactive</ActivityStatus>;
+            case "account":
+                if (td === true) {
+                    return <>  {/* <ActivityStatus>Active</ActivityStatus> */}   ..Active  </>;
+                }
+                return <>  {/* <ActivityStatus>Inactive</ActivityStatus> */}     .. Inactive   </>;
+            // case "duration":
+            //     return `${convertDaysToYearsAndMonths(td)}`;
+            // case "cost":
+            //     return `$${td}`;
+            // case "date":
+            //     return `${formatDateAndTime(td)}`;
+            // case "createdOn":
+            //     return `${formatDateAndTime(td)}`;
+
+            case "state":
+                return td?.toUpperCase();
+
+            default:
+                return td;
+        }
+    };
     return (
         <div class="flex flex-col bg-white rounded-[8px] overflow-hidden shadow-md">
             <div class="-m-1.5 overflow-x-auto">
@@ -9,13 +105,15 @@ function Table({ children }) {
                     <div class="overflow-hidden ">
                         <div class="bg-white flex justify-between items-center py-3 px-5 ">
                             <span className='text-black-2 text-[18px] leading-[28px] font-medium'>Filters</span>
-                            <div>
-                                <div class="relative max-w-xs">
-                                    <label class="sr-only">Search</label>
-                                    <input type="text" name="hs-table-with-pagination-search" id="hs-table-with-pagination-search" class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Search for items" />
-                                    <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
-                                        <svg class="h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
-                                    </div>
+                            <div className='flex justify-end items-center gap-1'>
+                                {filterBy?.map(value => {
+                                    return (
+                                        <InputWithLabel name={value} />
+                                    )
+                                })}
+                                <div className='flex justify-end items-center gap-1'>
+                                    <Button type="narrow">Search</Button>
+                                    <Button type="narrow" color="white" icon="Cross">Reset</Button>
                                 </div>
                             </div>
                         </div>
@@ -23,99 +121,86 @@ function Table({ children }) {
                             <table class="min-w-full divide-y">
                                 <thead class="bg-gray-9 dark:bg-gray-700 text-left border-t">
                                     <tr>
-                                        {/* <th scope="col" class="py-3 px-4 pe-0">
-                                            <div class="flex items-center h-5">
-                                                <input id=" hs-table-pagination-checkbox-all" type="checkbox" class="border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" />
-                                                <label for="hs-table-pagination-checkbox-all" class="sr-only">Checkbox</label>
-                                            </div>
-                                        </th> */}
-                                        <th scope="col" class="text-black-2 text-[13px] leading-[19px] font-semibold px-5 py-3"><div className='flex justify-between'>Name <span className='text-gray-8'><Icon name="Sort1" /></span></div></th>
-                                        <th scope="col" class="text-black-2 text-[13px] leading-[19px] font-semibold px-5 py-3"><div className='flex justify-between'>Age <span className='text-gray-8'><Icon name="Sort1" /></span></div></th>
-                                        <th scope="col" class="text-black-2 text-[13px] leading-[19px] font-semibold px-5 py-3"><div className='flex justify-between'>Address <span className='text-gray-8'><Icon name="Sort1" /></span></div></th>
-                                        <th scope="col" class="text-black-2 text-[13px] leading-[19px] font-semibold px-5 py-3"><div className='flex justify-between'>Action <span className='text-gray-8'><Icon name="Sort1" /></span></div></th>
+                                        {columns?.map(value => {
+                                            return (
+                                                <>
+                                                    {/* <th scope="col" class="py-3 px-4 pe-0">
+                                                    <div class="flex items-center h-5">
+                                                        <input id=" hs-table-pagination-checkbox-all" type="checkbox" class="border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" />
+                                                        <label for="hs-table-pagination-checkbox-all" class="sr-only">Checkbox</label>
+                                                    </div>
+                                                </th> */}
+                                                    <th scope="col" class="text-black-2 text-[13px] leading-[19px] font-semibold px-5 py-3">
+                                                        <div className='flex justify-between'>
+                                                            <span className='capitalize'>{tableHeading(value)}</span>
+                                                            {/* <span className='text-gray-8'>
+                                                                <Icon name="Sort1" />
+                                                            </span> */}
+                                                        </div>
+                                                    </th>
+                                                </>
+                                            )
+                                        })}
                                     </tr>
+
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                                    <tr>
-                                        {/* <td class="py-3 ps-4">
+                                    {/* <td class="py-3 ps-4">
                                             <div class="flex items-center h-5">
                                                 <input id="hs-table-pagination-checkbox-1" type="checkbox" class="border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" />
                                                 <label for="hs-table-pagination-checkbox-1" class="sr-only">Checkbox</label>
                                             </div>
                                         </td> */}
-                                        <td class="px-5 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">John Brown</td>
-                                        <td class="px-5 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">45</td>
-                                        <td class="px-5 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">New York No. 1 Lake Park</td>
-                                        <td class="px-5 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        {/* <td class="py-3 ps-4">
-                                            <div class="flex items-center h-5">
-                                                <input id="hs-table-pagination-checkbox-5" type="checkbox" class="border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" />
-                                                <label for="hs-table-pagination-checkbox-5" class="sr-only">Checkbox</label>
-                                            </div>
-                                        </td> */}
-                                        <td class="px-5 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">Jim Red</td>
-                                        <td class="px-5 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">45</td>
-                                        <td class="px-5 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">Melbourne No. 1 Lake Park</td>
-                                        <td class="px-5 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Delete</button>
-                                        </td>
-                                    </tr>
+                                    {data.map(row => (
+                                        <tr key={row * 5}>
+                                            {columns.map(column => {
+                                                if (column === "action" && actions) {
+                                                    return (
+                                                        <td
+                                                            key={column}
+                                                            className="flex justify-center items-center gap-x-2 whitespace-nowrap text-gray-6 dark:text-gray-200 text-[13px] leading-[19px] font-medium px-5 py-4"
+                                                        // maxW="500px"
+                                                        // overflow={"auto"}
+                                                        // isNumeric
+                                                        // borderColor={"gray.200"}
+                                                        >
+                                                            {actions?.view && (
+                                                                <span className='cursor-pointer'
+                                                                    onClick={() => onViewClick(row._id)
+                                                                    }>
+                                                                    <Icon name="View" />
+                                                                </span>
+                                                            )}
+                                                            {actions?.edit && (
+                                                                <span className='cursor-pointer'
+                                                                    onClick={() => onEditClick(row._id)
+                                                                    }>
+                                                                    <Icon name="Edit" />
+                                                                </span>
+                                                            )}
+                                                            {actions?.delete && (
+                                                                <span className='cursor-pointer'
+                                                                    onClick={() => onDeleteClick(row._id)
+                                                                    }>
+                                                                    <Icon name="Delete" />
+                                                                </span>
+                                                            )}
+                                                        </td>
+                                                    );
+                                                }
 
+                                                return (
+                                                    <td key={column * 5} class="px-5 py-4 text-gray-6 dark:text-gray-200 text-[13px] leading-[19px] font-medium whitespace-nowrap">
+                                                        {/* {row[column]} */}
+                                                        {renderTableCell(row[column], column)}
+                                                    </td>
+                                                )
 
+                                                {/* <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-teal-500 text-white">Badge</span> */ }
 
-
-
-
-
-
-
-
-                                    <tr>
-                                        {/* <td class="py-3 ps-4">
-                                            <div class="flex items-center h-5">
-                                                <input id="hs-table-pagination-checkbox-5" type="checkbox" class="border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" />
-                                                <label for="hs-table-pagination-checkbox-5" class="sr-only">Checkbox</label>
-                                            </div>
-                                        </td> */}
-                                        <td class="px-5 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">Jim Red</td>
-                                        <td class="px-5 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">45</td>
-                                        <td class="px-5 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">Melbourne No. 1 Lake Park</td>
-                                        <td class="px-5 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        {/* <td class="py-3 ps-4">
-                                            <div class="flex items-center h-5">
-                                                <input id="hs-table-pagination-checkbox-5" type="checkbox" class="border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" />
-                                                <label for="hs-table-pagination-checkbox-5" class="sr-only">Checkbox</label>
-                                            </div>
-                                        </td> */}
-                                        <td class="px-5 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">Jim Red</td>
-                                        <td class="px-5 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">45</td>
-                                        <td class="px-5 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">Melbourne No. 1 Lake Park</td>
-                                        <td class="px-5 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        {/* <td class="py-3 ps-4">
-                                            <div class="flex items-center h-5">
-                                                <input id="hs-table-pagination-checkbox-5" type="checkbox" class="border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" />
-                                                <label for="hs-table-pagination-checkbox-5" class="sr-only">Checkbox</label>
-                                            </div>
-                                        </td> */}
-                                        <td class="px-5 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">Jim Red</td>
-                                        <td class="px-5 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">45</td>
-                                        <td class="px-5 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">Melbourne No. 1 Lake Park</td>
-                                        <td class="px-5 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                            <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Delete</button>
-                                        </td>
-                                    </tr>
+                                            })}
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
@@ -140,7 +225,7 @@ function Table({ children }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
 
     )
 }

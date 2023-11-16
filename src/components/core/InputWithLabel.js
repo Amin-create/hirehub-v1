@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from "react-router-dom";
 import { Icons } from '..';
- 
+
 
 function InputWithLabel({ label, name, forgotPassword }) {
 
@@ -55,6 +55,11 @@ function InputWithLabel({ label, name, forgotPassword }) {
             case "newPassword":
             case "confirmPassword":
                 return "••••••••••";
+            case "SearchByName":
+                return "Search By Name";
+            case "SearchByTitle":
+                return "Search By Title";
+
 
 
             case "fullName":
@@ -82,6 +87,8 @@ function InputWithLabel({ label, name, forgotPassword }) {
             case "lastName":
             case "message":
             case "phoneNumber":
+            case "SearchByName":
+            case "SearchByTitle":
                 return "text";
             case "password":
             case "newPassword":
