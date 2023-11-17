@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Icon from '../icon';
 import { Button, InputWithLabel } from '../core';
+import ActivityStatus from '../core/ActivityStatus';
+import { Pagination } from 'antd';
 
 function Table({
     columns,
@@ -13,6 +15,16 @@ function Table({
 }) {
     const tableHeading = (col) => {
         switch (col) {
+            case "name":
+            case "plans":
+            case "account":
+                return <div className='flex justify-between items-center w-full'>
+                    {col}
+                    <span className='text-gray-8 cursor-pointer'>
+                        <Icon name="Sort1" />
+                    </span>
+                </div>;
+
             case "createdOn":
                 return "Created On";
             case "nextPayment":
@@ -23,65 +35,36 @@ function Table({
         }
     };
     const renderTableCell = (td, col) => {
+        console.log("td--", td)
         if (typeof td === "string") td = td.toLowerCase();
-        if (
-            td === "completed" ||
-            td === "pending" ||
-            td === "inprocess" ||
-            td === "active"
-        )
-            return
-        <>
-            {/* <Core.Badge status={td} /> */}
-            <span>....{td}</span>
-        </>
-            ;
-        if (col.toLowerCase() === "active") return
-
-        <>
-            {/*   <Core.Badge status={"active"} /> */}
-            <span>....{td}</span>
-        </>
-            ;
-        if (col.toLowerCase() === "inactive")
-            return
-
-        <>
-            {/*  <Core.Badge status={"inactive"} /> */}
-            <span>....{td}</span>
-        </>
-            ;
-
         switch (col) {
             case "payment":
                 if (td === true) {
-                    return (
-                        <>
-                            {/* <Flex color="green.400" alignItems={"center"} columnGap={"3px"}>
-                            <Icons.BsCheck2 />
-                            <Text color="black">Paid</Text>
-                        </Flex> */}
-                            ...Paid
-                        </>
-                    );
+                    return ("Paid");
                 }
-                return (
-                    <>
-                        {/* <Flex color="red.500" alignItems={"center"} columnGap={"3px"}>
-                        <Icons.IoMdClose />
-                        <Text color="black">Unpaid</Text>
-                    </Flex> */}
-                        ...Unpaid
-                    </>
-                );
-            // case "status":
-            //     if (td === true) return <ActivityStatus>Active</ActivityStatus>;
-            //     return <ActivityStatus>Inactive</ActivityStatus>;
+                return ("Unpaid");
             case "account":
-                if (td === true) {
-                    return <>  {/* <ActivityStatus>Active</ActivityStatus> */}   ..Active  </>;
+                if (td.toLowerCase() === "active") {
+                    return <div className='w-full text-center'><ActivityStatus>Active</ActivityStatus></div>;
                 }
-                return <>  {/* <ActivityStatus>Inactive</ActivityStatus> */}     .. Inactive   </>;
+                if (td.toLowerCase() === "deactive") {
+                    return <div className='w-full text-center'><ActivityStatus>Deactive</ActivityStatus></div>;
+                }
+                if (td.toLowerCase() === "hold") {
+                    return <div className='w-full text-center'><ActivityStatus>Hold</ActivityStatus></div>;
+                }
+
+            case "name":
+                if (td?.img) {
+                    return <div className='flex justify-start items-center gap-x-2'>
+                        <img class="inline-block h-[30px] w-[30px] rounded-full" src={td?.img} alt="profile image" />
+                        <span>{td?.name}</span>
+                    </div>;
+                }
+                else {
+                    return <span>{td}</span>;
+                }
+
             // case "duration":
             //     return `${convertDaysToYearsAndMonths(td)}`;
             // case "cost":
@@ -119,7 +102,7 @@ function Table({
                         </div>
                         <div class="overflow-hidden">
                             <table class="min-w-full divide-y">
-                                <thead class="bg-gray-9 dark:bg-gray-700 text-left border-t">
+                                <thead class="bg-gray-9 dark:bg-gray-700 text-left">
                                     <tr>
                                         {columns?.map(value => {
                                             return (
@@ -132,10 +115,7 @@ function Table({
                                                 </th> */}
                                                     <th scope="col" class="text-black-2 text-[13px] leading-[19px] font-semibold px-5 py-3">
                                                         <div className='flex justify-between'>
-                                                            <span className='capitalize'>{tableHeading(value)}</span>
-                                                            {/* <span className='text-gray-8'>
-                                                                <Icon name="Sort1" />
-                                                            </span> */}
+                                                            <span className='w-full capitalize'>{tableHeading(value)}</span>
                                                         </div>
                                                     </th>
                                                 </>
@@ -188,9 +168,8 @@ function Table({
                                                         </td>
                                                     );
                                                 }
-
                                                 return (
-                                                    <td key={column * 5} class="px-5 py-4 text-gray-6 dark:text-gray-200 text-[13px] leading-[19px] font-medium whitespace-nowrap">
+                                                    <td key={column * 5} class="px-5 py-4 text-gray-6 dark:text-gray-200 text-[13px] leading-[19px] capitalize font-medium whitespace-nowrap">
                                                         {/* {row[column]} */}
                                                         {renderTableCell(row[column], column)}
                                                     </td>
@@ -205,22 +184,29 @@ function Table({
                             </table>
                         </div>
                         <div class="flex justify-between items-center border-t py-3 px-4">
-                            <span className='text-gray-6 text-[14px] leading-[20px] font-medium'>
+                            <span className='text-gray-6 text-[14px] leading-[20px] font-semibold'>
                                 Showing 1-10 from 100
                             </span>
-                            <nav class="flex items-center space-x-1">
-                                <button type="button" class="p-2.5 inline-flex items-center gap-x-2 text-sm rounded-full text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                                    <span aria-hidden="true">«</span>
+                            <Pagination defaultCurrent={6} total={500} />
+                            {/* itemBg={"#000"} itemInputBg={"#fcfcfc"} itemLinkBg={"#f6cf6c"} itemSize="100" */}
+                            {/* <nav class="flex items-center space-x-1">
+                                <button type="button" class="w-[32px] h-[32px] flex items-center gap-x-2 text-sm rounded-[8px] text-purple-4 bg-purple-7 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 p-2.5 ">
+                                    <span aria-hidden="true">
+                                        <Icon name="ChevronLeft" size="10" />
+                                    </span>
                                     <span class="sr-only">Previous</span>
                                 </button>
-                                <button type="button" class="min-w-[40px] flex justify-center items-center text-gray-800 hover:bg-gray-100 py-2.5 text-sm rounded-full disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10" aria-current="page">1</button>
-                                <button type="button" class="min-w-[40px] flex justify-center items-center text-gray-800 hover:bg-gray-100 py-2.5 text-sm rounded-full disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10">2</button>
-                                <button type="button" class="min-w-[40px] flex justify-center items-center text-gray-800 hover:bg-gray-100 py-2.5 text-sm rounded-full disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10">3</button>
-                                <button type="button" class="p-2.5 inline-flex items-center gap-x-2 text-sm rounded-full text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                <button type="button" class="w-[32px] h-[32px] flex justify-center items-center text-purple-4 text-[14px] leading-[20px] font-semibold bg-purple-7 py-2.5 rounded-[8px] disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10" aria-current="page">1</button>
+                                <button type="button" class="w-[32px] h-[32px] flex justify-center items-center text-purple-4 text-[14px] leading-[20px] font-semibold bg-purple-7 py-2.5 rounded-[8px] disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10">2</button>
+                                <button type="button" class="w-[32px] h-[32px] flex justify-center items-center text-purple-4 text-[14px] leading-[20px] font-semibold bg-purple-7 py-2.5 rounded-[8px] disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10">3</button>
+                                <button type="button" class="w-[32px] h-[32px] flex items-center gap-x-2 text-purple-4 text-[14px] leading-[20px] font-semibold bg-purple-7 rounded-[8px] disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 p-2.5 ">
                                     <span class="sr-only">Next</span>
-                                    <span aria-hidden="true">»</span>
+                                    <span aria-hidden="true">
+                                        <Icon name="ChevronRight" size="10" />
+
+                                    </span>
                                 </button>
-                            </nav>
+                            </nav> */}
                         </div>
                     </div>
                 </div>

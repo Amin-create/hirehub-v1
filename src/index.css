@@ -22,13 +22,42 @@ body {
     background: #9c9afc49;
     border-radius: 100vh 0 0 100vh;
 }
+
 .scrollbar::-webkit-scrollbar {
- 
+
     width: 5px;
     height: 5px;
 }
+
 .scrollbar:hover::-webkit-scrollbar {
 
     width: 5px;
     height: 5px;
+}
+
+.ant-pagination .ant-pagination-item a,
+.ant-pagination .ant-pagination-next .ant-pagination-item-link {
+    width: 32px;
+    height: 32px;
+    color: #8913FF;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.ant-pagination .ant-pagination-item-active a {
+    color: #fff;
+}
+
+.ant-pagination .ant-pagination-item,
+.ant-pagination .ant-pagination-next,
+.ant-pagination .ant-pagination-prev {
+    background-color: #F3EFF6;
+    border: none;
+}
+
+.ant-pagination .ant-pagination-item-active {
+    background-color: #8913FF;
+}
+.ant-pagination .ant-pagination-options {
+    display: none;
 }

@@ -6,7 +6,7 @@ function Button({ children, submit, type, color, icon }) {
         <button
             className={`
             ${type === "narrow" ? "" : 'w-full'}
-            text-[13px] leading-[18px]
+            text-[14px] leading-[20px] font-semibold
                 ${!color && 'text-white'}
                 rounded-[8px] 
                 ${!color && 'bg-gradient-to-r from-purple-2 to-purple-3 '}
@@ -19,7 +19,7 @@ function Button({ children, submit, type, color, icon }) {
              `}
             type={submit && "submit"}>
             <div className='flex justify-center items-center gap-x-1'>
-                <Icon name={icon} size="10.2" />
+                <span className='mb-0.5'><Icon name={icon} size="12" /></span>
                 {children}
             </div>
         </button>

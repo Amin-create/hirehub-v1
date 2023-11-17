@@ -1,48 +1,64 @@
 import React, { useState } from 'react';
 import { Breadcrumb, StatsGroup } from '../../components/core';
 import { Table } from '../../components';
+import avatar1 from "../../assets/images/avatars/2.png";
 
 const columns = ["name", "plans", "payment", "nextPayment", "account", "action"];
 const employees = [
     {
         id: "1",
-        name: "Handmade Pouch",
+        name: {
+            img: avatar1,
+            name: "Handmade Pouch",
+        },
         plans: "Silver Plan",
-        payment: "Paid",
+        payment: true,
         nextPayment: "10/19/25 5:45am",
-        account: false,
+        account: 'active',
     },
     {
         id: "2",
-        name: "Handmade Pouch",
+        name: {
+            img: avatar1,
+            name: "Handmade Pouch",
+        },
         plans: "Browns Plan",
-        payment: "Paid",
+        payment: true,
         nextPayment: "10/19/25 5:45am",
-        account: false,
+        account: 'active',
     },
     {
         id: "3",
-        name: "Handmade Pouch",
+        name: {
+            img: avatar1,
+            name: "Handmade Pouch",
+        },
         plans: "Platinum Plan",
-        payment: "Unpaid",
+        payment: false,
         nextPayment: "10/19/25 5:45am",
-        account: true,
+        account: 'deactive',
     },
     {
         id: "4",
-        name: "Handmade Pouch",
+        name: {
+            img: avatar1,
+            name: "Handmade Pouch",
+        },
         plans: "Silver Plan",
-        payment: "Paid",
+        payment: false,
         nextPayment: "10/19/25 5:45am",
-        account: true,
+        account: 'deactive',
     },
     {
         id: "5",
-        name: "Handmade Pouch",
+        name: {
+            img: avatar1,
+            name: "Handmade Pouch",
+        },
         plans: "Elite Professional Plan",
-        payment: "Paid",
+        payment: true,
         nextPayment: "10/19/25 5:45am",
-        account: true,
+        account: 'hold',
     },
 ];
 const actions = {
