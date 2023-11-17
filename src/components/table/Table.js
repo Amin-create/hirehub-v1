@@ -154,11 +154,11 @@ function Table({
                                                                     <Icon name="Edit" />
                                                                 </span>
                                                             )}
-                                                            {actions?.delete && (
+                                                            {actions?.message && (
                                                                 <span className='cursor-pointer'
                                                                     onClick={() => onDeleteClick(row._id)
                                                                     }>
-                                                                    <Icon name="Delete" />
+                                                                    <Icon name="Message" />
                                                                 </span>
                                                             )}
                                                             {actions?.date && (

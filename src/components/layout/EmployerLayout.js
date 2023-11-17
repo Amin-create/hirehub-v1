@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Header, Sidebar } from '../../components';
+import { Header, Sidebar } from '..';
 import { Outlet } from 'react-router-dom';
 import Icon from '../icon';
 
@@ -11,13 +11,8 @@ const menu = [
     },
     {
         icon: <Icon name="User" />,
-        path: "manage-employers",
-        name: "Manage Employers",
-    },
-    {
-        icon: <Icon name="Users" />,
-        path: "manage-candidates",
-        name: "Manage Candidates",
+        path: "manage-profile",
+        name: "Manage Profile",
     },
     {
         icon: <Icon name="Briefcase" />,
@@ -25,48 +20,38 @@ const menu = [
         name: "Manage Jobs",
     },
     {
-        icon: <Icon name="Wallet" />,
-        path: "manage-payments",
-        name: "Manage Payments",
+        icon: <Icon name="Users" />,
+        path: "manage-candidates",
+        name: "Manage Candidates",
     },
     {
         icon: <Icon name="SmsNotification" />,
-        path: "manage-subscription-packages",
-        name: "Manage Subscription Packages",
+        path: "manage-subscription",
+        name: "Manage Subscription",
+    },
+    {
+        icon: <Icon name="Chat1" size="19" />,
+        path: "hat",
+        name: "Chat",
     },
     {
         icon: <Icon name="Bell1" />,
-        path: "manage-notification",
-        name: "Manage Notification",
-    },
-    {
-        icon: <Icon name="Document1" />,
-        path: "manage-terms-and-conditions",
-        name: "Manage Terms and Conditions",
-    },
-    {
-        icon: <Icon name="Keyboard" />,
-        path: "manage-faq",
-        name: "Manage FAQ",
+        path: "notification",
+        name: "Notification",
     },
     {
         icon: <Icon name="Envelope" />,
-        path: "email-templates",
-        name: "Email Templates",
+        path: "manage-email",
+        name: "Manage Email",
     },
     {
-        icon: <Icon name="Setting1" />,
-        path: "manage-platform-setting",
-        name: "Manage Platform setting",
-    },
-    {
-        icon: <Icon name="Book" />,
-        path: "manage-blogs",
-        name: "Manage Blogs",
+        icon: <Icon name="DocumentText" />,
+        path: "manage-questionnaire",
+        name: "Manage Questionnaire",
     },
 ]
 
-function AdminLayout() {
+function EmployerLayout() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const toggleSidebar = () => {
@@ -96,4 +81,4 @@ function AdminLayout() {
     )
 }
 
-export default AdminLayout
+export default EmployerLayout

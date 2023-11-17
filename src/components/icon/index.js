@@ -136,17 +136,15 @@ const Icon = ({ name, size, ...props }) => {
 
 
         ),
-        Delete: (
+        Chat1: (
             <svg
                 {...props}
-                width={size ? size : "20"}
-                height={size ? size : "20"}
-                viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6.375 14.25H6C3 14.25 1.5 13.5 1.5 9.75V6C1.5 3 3 1.5 6 1.5H12C15 1.5 16.5 3 16.5 6V9.75C16.5 12.75 15 14.25 12 14.25H11.625C11.3925 14.25 11.1675 14.3625 11.025 14.55L9.9 16.05C9.405 16.71 8.595 16.71 8.1 16.05L6.975 14.55C6.855 14.385 6.5775 14.25 6.375 14.25Z" stroke="#667085" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M5.25 6H12.75" stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M5.25 9.75H9.75" stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                width={size ? size : "18"}
+                height={size ? size : "16"}
+                viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.3 4.82494V9.41492C19.3 10.5579 18.922 11.5209 18.247 12.1869C17.581 12.8619 16.618 13.2399 15.475 13.2399V14.8689C15.475 15.4809 14.791 15.8499 14.287 15.5079L13.414 14.9319C13.495 14.6529 13.531 14.3469 13.531 14.0229V10.36C13.531 8.52396 12.307 7.29994 10.471 7.29994H4.35999C4.23399 7.29994 4.117 7.30896 4 7.31796V4.82494C4 2.52994 5.53 0.999939 7.825 0.999939H15.475C17.77 0.999939 19.3 2.52994 19.3 4.82494Z" stroke="#667085" stroke-width="1.35" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M13.231 10.36V14.023C13.231 14.347 13.195 14.653 13.114 14.932C12.781 16.255 11.683 17.083 10.171 17.083H7.723L5.005 18.892C4.6 19.171 4.05999 18.874 4.05999 18.388V17.083C3.14199 17.083 2.377 16.777 1.846 16.246C1.306 15.706 1 14.941 1 14.023V10.36C1 8.65001 2.062 7.47101 3.7 7.31801C3.817 7.30901 3.93399 7.29999 4.05999 7.29999H10.171C12.007 7.29999 13.231 8.52401 13.231 10.36Z" stroke="#667085" stroke-width="1.35" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
-
         ),
         Document1: (
             <svg
@@ -159,6 +157,18 @@ const Icon = ({ name, size, ...props }) => {
                 <path d="M5 13H8.2" stroke="currentColor" stroke-width="1.42857" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M17 7.4V11.4C17 15.4 15.4 17 11.4 17H6.6C2.6 17 1 15.4 1 11.4V6.6C1 2.6 2.6 1 6.6 1H10.6" stroke="currentColor" stroke-width="1.42857" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
+        ),
+        DocumentText: (<svg
+            {...props}
+            width={size ? size : "18"}
+            height={size ? size : "18"}
+            viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.5 5.83341V14.1667C17.5 16.6667 16.25 18.3334 13.3333 18.3334H6.66667C3.75 18.3334 2.5 16.6667 2.5 14.1667V5.83341C2.5 3.33341 3.75 1.66675 6.66667 1.66675H13.3333C16.25 1.66675 17.5 3.33341 17.5 5.83341Z" stroke="#667085" stroke-width="1.25" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M12.0833 3.75V5.41667C12.0833 6.33333 12.8333 7.08333 13.7499 7.08333H15.4166" stroke="#667085" stroke-width="1.25" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M6.66675 10.8333H10.0001" stroke="#667085" stroke-width="1.25" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M6.66675 14.1667H13.3334" stroke="#667085" stroke-width="1.25" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+
         ),
         Edit: (
             <svg
@@ -202,6 +212,18 @@ const Icon = ({ name, size, ...props }) => {
                 <path d="M8.90002 7.56023C9.21002 3.96023 11.06 2.49023 15.11 2.49023H15.24C19.71 2.49023 21.5 4.28023 21.5 8.75023V15.2702C21.5 19.7402 19.71 21.5302 15.24 21.5302H15.11C11.09 21.5302 9.24002 20.0802 8.91002 16.5402" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M15 12H3.62" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M5.85 8.65039L2.5 12.0004L5.85 15.3504" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+
+        ),
+        Message: (
+            <svg
+                {...props}
+                width={size ? size : "20"}
+                height={size ? size : "20"}
+                viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.375 14.25H6C3 14.25 1.5 13.5 1.5 9.75V6C1.5 3 3 1.5 6 1.5H12C15 1.5 16.5 3 16.5 6V9.75C16.5 12.75 15 14.25 12 14.25H11.625C11.3925 14.25 11.1675 14.3625 11.025 14.55L9.9 16.05C9.405 16.71 8.595 16.71 8.1 16.05L6.975 14.55C6.855 14.385 6.5775 14.25 6.375 14.25Z" stroke="#667085" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M5.25 6H12.75" stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M5.25 9.75H9.75" stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
 
         ),

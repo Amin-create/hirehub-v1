@@ -62,9 +62,9 @@ const employees = [
     },
 ];
 const actions = {
-    edit: true,
-    delete: true,
     view: true,
+    edit: true,
+    message: true,
 };
 
 const breadcrumb = [

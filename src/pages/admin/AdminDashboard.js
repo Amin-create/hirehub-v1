@@ -1,7 +1,7 @@
 import React from 'react';
 import { StatsGroup } from '../../components/core';
 
-function Dashboard() {
+function AdminDashboard() {
     const statsData = [
         {
             title: "Employers",
@@ -29,4 +29,4 @@ function Dashboard() {
     );
 }
 
-export default Dashboard;
+export default AdminDashboard;

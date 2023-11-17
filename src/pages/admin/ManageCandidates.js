@@ -1,6 +1,6 @@
 import React from 'react';
-import { Breadcrumb, StatsGroup } from '../../components/core';
 import { Table } from '../../components';
+import { Breadcrumb, StatsGroup } from '../../components/core';
 import avatar1 from "../../assets/images/avatars/2.png";
 
 const columns = ["name", "jobTitle", "employer", "eligibility", "experience", "salary", "stage", "status", "action"];
@@ -92,8 +92,8 @@ const candidates = [
 
 ];
 const actions = {
+    view: true,
     edit: true,
-    delete: true,
     date: true,
 };
 

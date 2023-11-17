@@ -1,13 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
-  Dashboard,
+  AdminDashboard,
   LoginPage,
   ForgotPasswordPage,
   ManageEmployers,
   ManageCandidates,
+  ManageProfile,
   RegisterPage,
+  EmployerDashboard,
 } from "./pages/index";
-import { AdminLayout } from "./components";
+import { AdminLayout, EmployerLayout } from "./components";
 
 function App() {
   return (
@@ -19,9 +21,14 @@ function App() {
         <Route path="register" element={<RegisterPage />} />
 
         <Route path="admin/" element={<AdminLayout />} >
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="manage-employers" element={<ManageEmployers />} />
           <Route path="manage-candidates" element={<ManageCandidates />} />
+        </Route>
+
+        <Route path="employer/" element={<EmployerLayout />} >
+          <Route path="dashboard" element={<EmployerDashboard />} />
+          <Route path="manage-profile" element={<ManageProfile />} />
         </Route>
 
       </Routes>
