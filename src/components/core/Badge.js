@@ -1,6 +1,6 @@
 import React from "react";
 
-function ActivityStatus({ children, }) {
+function Badge({ children }) {
     const bgColor = (_children) => {
         const lowercaseStatus = _children?.toLowerCase(); // Use optional chaining to handle undefined status
         switch (lowercaseStatus) {
@@ -10,6 +10,23 @@ function ActivityStatus({ children, }) {
                 return "bg-red-3";
             case "hold":
                 return "bg-warning-3";
+            case "new application":
+            case "application":
+            case "screening":
+            case "job offer":
+            case "hire":
+            case "screening":
+            case "interview":
+            case "interested":
+            case "not interested":
+            case "selection":
+            case "qualified":
+            case "unqualified":
+            case "new":
+            case "connected":
+            case "attempted to contact":
+            case "on hold":
+                return "bg-gray-10";
             default:
                 return "";
         }
@@ -23,6 +40,23 @@ function ActivityStatus({ children, }) {
                 return "text-red-2";
             case "hold":
                 return "text-warning-2";
+            case "new application":
+            case "application":
+            case "screening":
+            case "job offer":
+            case "hire":
+            case "screening":
+            case "interview":
+            case "interested":
+            case "not interested":
+            case "selection":
+            case "qualified":
+            case "unqualified":
+            case "new":
+            case "connected":
+            case "attempted to contact":
+            case "on hold":
+                return "text-gray-6";
             default:
                 return "";
         }
@@ -36,4 +70,4 @@ function ActivityStatus({ children, }) {
     );
 };
 
-export default ActivityStatus;
+export default Badge;

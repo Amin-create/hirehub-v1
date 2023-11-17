@@ -2,8 +2,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   Dashboard,
   LoginPage,
-  ForgotPasswordPage, ManageEmployers,
-  RegisterPage
+  ForgotPasswordPage,
+  ManageEmployers,
+  ManageCandidates,
+  RegisterPage,
 } from "./pages/index";
 import { AdminLayout } from "./components";
 
@@ -19,6 +21,7 @@ function App() {
         <Route path="admin/" element={<AdminLayout />} >
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="manage-employers" element={<ManageEmployers />} />
+          <Route path="manage-candidates" element={<ManageCandidates />} />
         </Route>
 
       </Routes>

@@ -3,18 +3,21 @@ import { Breadcrumb, StatsGroup } from '../../components/core';
 import { Table } from '../../components';
 import avatar1 from "../../assets/images/avatars/2.png";
 
-const columns = ["name", "plans", "payment", "nextPayment", "account", "action"];
-const employees = [
+const columns = ["name", "jobTitle", "employer", "eligibility", "experience", "salary", "stage", "status", "action"];
+const candidates = [
     {
         id: "1",
         name: {
             img: avatar1,
             name: "Handmade Pouch",
         },
-        plans: "Silver Plan",
-        payment: true,
-        nextPayment: "10/19/25 5:45am",
-        account: 'active',
+        jobTitle: "Software Engineer",
+        employer: "Tesla",
+        eligibility: true,
+        experience: "3.6 years",
+        salary: "20,000",
+        stage: "New Application",
+        status: "New",
     },
     {
         id: "2",
@@ -22,21 +25,27 @@ const employees = [
             img: avatar1,
             name: "Handmade Pouch",
         },
-        plans: "Browns Plan",
-        payment: true,
-        nextPayment: "10/19/25 5:45am",
-        account: 'active',
+        jobTitle: "Software Engineer",
+        employer: "Wells Fargo",
+        eligibility: true,
+        experience: "10 Years",
+        salary: "1000 ",
+        stage: "Screening",
+        status: "Attempted to Contact",
     },
     {
-        id: "3",
+        id: "3 ",
         name: {
             img: avatar1,
             name: "Handmade Pouch",
         },
-        plans: "Platinum Plan",
-        payment: false,
-        nextPayment: "10/19/25 5:45am",
-        account: 'deactive',
+        jobTitle: "Software Engineer",
+        employer: "Amazon",
+        eligibility: false,
+        experience: "7 Years",
+        salary: "12,000",
+        stage: "Job Offer",
+        status: "Qualified",
     },
     {
         id: "4",
@@ -44,10 +53,13 @@ const employees = [
             img: avatar1,
             name: "Handmade Pouch",
         },
-        plans: "Silver Plan",
-        payment: false,
-        nextPayment: "10/19/25 5:45am",
-        account: 'deactive',
+        jobTitle: "Software Engineer",
+        employer: "The Home Depot",
+        eligibility: false,
+        experience: "6 years",
+        salary: "6500",
+        stage: "Hire",
+        status: "Not Interested",
     },
     {
         id: "5",
@@ -55,24 +67,42 @@ const employees = [
             img: avatar1,
             name: "Handmade Pouch",
         },
-        plans: "Elite Professional Plan",
-        payment: true,
-        nextPayment: "10/19/25 5:45am",
-        account: 'hold',
+        jobTitle: "Software Engineer",
+        employer: "Tesla",
+        eligibility: true,
+        experience: "3.6 years",
+        salary: "20,000",
+        stage: "New Application",
+        status: "New",
     },
+    {
+        id: "6",
+        name: {
+            img: avatar1,
+            name: "Handmade Pouch",
+        },
+        jobTitle: "Software Engineer",
+        employer: "Wells Fargo",
+        eligibility: true,
+        experience: "10 Years",
+        salary: "1000 ",
+        stage: "Screening",
+        status: "Attempted to Contact",
+    },
+
 ];
 const actions = {
     edit: true,
     delete: true,
-    view: true,
+    date: true,
 };
 
 const breadcrumb = [
     { label: "Dashboard", link: "/dashboard" },
-    { label: "Manage Employers" },
+    { label: "Manage Candidates" },
 ];
 
-function ManageEmployers() {
+function ManageCandidates() {
     const statsData = [
         {
             title: "Approved Employers",
@@ -126,17 +156,16 @@ function ManageEmployers() {
     return (
         <>
             <Breadcrumb
-                heading="Manage Employers"
+                heading="Manage Candidates"
                 breadcrumb={breadcrumb}
             />
-            <StatsGroup data={statsData} />
             <Table
                 // actionButton={{
                 //     name: "Add Department",
                 //     link: "/departments/add",
                 // }}
                 // id="employees-listing"
-                data={employees}
+                data={candidates}
                 columns={columns}
                 filterBy={["SearchByName", "SearchByTitle"]}
                 actions={actions}
@@ -154,4 +183,4 @@ function ManageEmployers() {
     );
 }
 
-export default ManageEmployers;
+export default ManageCandidates;

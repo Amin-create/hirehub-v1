@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Icon from '../icon';
-import { Button, InputWithLabel } from '../core';
-import ActivityStatus from '../core/ActivityStatus';
+import { Button, InputWithLabel, Badge } from '../core';
 import { Pagination } from 'antd';
 
 function Table({
@@ -43,28 +42,27 @@ function Table({
                     return ("Paid");
                 }
                 return ("Unpaid");
-            case "account":
-                if (td.toLowerCase() === "active") {
-                    return <div className='w-full text-center'><ActivityStatus>Active</ActivityStatus></div>;
-                }
-                if (td.toLowerCase() === "deactive") {
-                    return <div className='w-full text-center'><ActivityStatus>Deactive</ActivityStatus></div>;
-                }
-                if (td.toLowerCase() === "hold") {
-                    return <div className='w-full text-center'><ActivityStatus>Hold</ActivityStatus></div>;
-                }
-
             case "name":
                 if (td?.img) {
                     return <div className='flex justify-start items-center gap-x-2'>
                         <img class="inline-block h-[30px] w-[30px] rounded-full" src={td?.img} alt="profile image" />
-                        <span>{td?.name}</span>
+                        <span className='whitespace-nowrap'>{td?.name}</span>
                     </div>;
                 }
                 else {
                     return <span>{td}</span>;
                 }
-
+            case "jobTitle":
+                return td;
+            case "eligibility":
+                if (td === true) {
+                    return "Yes";
+                }
+                return "No";
+            case "account":
+            case "stage":
+            case "status":
+                return <div className='w-full text-center'><Badge>{td}</Badge></div>;
             // case "duration":
             //     return `${convertDaysToYearsAndMonths(td)}`;
             // case "cost":
@@ -73,12 +71,8 @@ function Table({
             //     return `${formatDateAndTime(td)}`;
             // case "createdOn":
             //     return `${formatDateAndTime(td)}`;
-
-            case "state":
-                return td?.toUpperCase();
-
             default:
-                return td;
+                return <span className='whitespace-nowrap'>{td}</span>;
         }
     };
     return (
@@ -138,7 +132,9 @@ function Table({
                                                     return (
                                                         <td
                                                             key={column}
-                                                            className="flex justify-center items-center gap-x-2 whitespace-nowrap text-gray-6 dark:text-gray-200 text-[13px] leading-[19px] font-medium px-5 py-4"
+                                                            className="flex justify-center items-center gap-x-2 h-[54px] whitespace-nowrap text-gray-6 dark:text-gray-200 text-[13px] leading-[19px] font-medium 
+                                                            px-5 py-0
+                                                            "
                                                         // maxW="500px"
                                                         // overflow={"auto"}
                                                         // isNumeric
@@ -165,11 +161,18 @@ function Table({
                                                                     <Icon name="Delete" />
                                                                 </span>
                                                             )}
+                                                            {actions?.date && (
+                                                                <span className='cursor-pointer'>
+                                                                    <Icon name="Calender1" size="20" />
+                                                                </span>
+                                                            )}
                                                         </td>
                                                     );
                                                 }
                                                 return (
-                                                    <td key={column * 5} class="px-5 py-4 text-gray-6 dark:text-gray-200 text-[13px] leading-[19px] capitalize font-medium whitespace-nowrap">
+                                                    <td key={column * 5} class="h-[54px] text-gray-6 dark:text-gray-200 text-[13px] leading-[19px] capitalize font-medium
+                                                      px-5 py-0
+                                                            ">
                                                         {/* {row[column]} */}
                                                         {renderTableCell(row[column], column)}
                                                     </td>
@@ -183,7 +186,7 @@ function Table({
                                 </tbody>
                             </table>
                         </div>
-                        <div class="flex justify-between items-center border-t py-3 px-4">
+                        <div class="flex justify-between items-center border-t py-5 px-4">
                             <span className='text-gray-6 text-[14px] leading-[20px] font-semibold'>
                                 Showing 1-10 from 100
                             </span>
