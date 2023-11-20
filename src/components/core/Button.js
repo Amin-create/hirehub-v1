@@ -1,9 +1,10 @@
 import React from 'react';
 import Icon from '../icon';
 
-function Button({ children, submit, type, color, icon }) {
+function Button({ children, onClick, submit, type, color, icon }) {
     return (
         <button
+            onClick={onClick}
             className={`
             ${type === "narrow" ? "" : 'w-full'}
             text-[14px] leading-[20px] font-semibold
@@ -17,9 +18,12 @@ function Button({ children, submit, type, color, icon }) {
                 hover:translate-y-[-1px] transition-all
                 py-[10px] px-5
              `}
-            type={submit && "submit"}>
+            type={submit && "submit"}
+        >
             <div className='flex justify-center items-center gap-x-1'>
-                <span className='mb-0.5'><Icon name={icon} size="12" /></span>
+                {icon &&
+                    <span className='mb-0.5'><Icon name={icon} size="12" /></span>
+                }
                 {children}
             </div>
         </button>

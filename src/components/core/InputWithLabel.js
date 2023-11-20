@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Icons } from '..';
 
 
-function InputWithLabel({ label, name, forgotPassword }) {
+function InputWithLabel({ label, name, forgotPassword, required, helperText }) {
 
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [inputType, setInputType] = useState('text');
@@ -13,6 +13,7 @@ function InputWithLabel({ label, name, forgotPassword }) {
         setInputType(passwordVisible ? 'password' : 'text');
     };
 
+
     const _label = (name) => {
         switch (name) {
             case "email":
@@ -21,6 +22,10 @@ function InputWithLabel({ label, name, forgotPassword }) {
                 return "Password";
             case "username":
                 return "Username";
+            case "YourCompanysName":
+                return "Your Company's Name";
+            case "YourPhoneNumber":
+                return "Your Phone Number";
 
             case "fullName":
                 return "Full Name";
@@ -59,7 +64,10 @@ function InputWithLabel({ label, name, forgotPassword }) {
                 return "Search By Name";
             case "SearchByTitle":
                 return "Search By Title";
-
+            case "YourCompanysName":
+                return "Handmade";
+            case "YourPhoneNumber":
+                return "+34 526 952 689";
 
 
             case "fullName":
@@ -103,7 +111,13 @@ function InputWithLabel({ label, name, forgotPassword }) {
     return (
         <>
             <div className="flex justify-between items-center">
-                {label && <label for={name} className="block text-[14px] font-medium text-gray-2 tracking-wide mb-2 capitalize">{_label(name)}</label>}
+                {label &&
+                    <label for={name} className={`
+                    block text-[14px] font-medium text-gray-2 tracking-wide ${helperText ? 'mb-1.5' : 'mb-2'} capitalize
+                    `}>
+                        {_label(name)}{required && <span className='text-[red]'>*</span>}
+                    </label>
+                }
                 {forgotPassword &&
                     <a className='text-purple-1 text-[14px] mb-2'>
                         <NavLink to="/forgot-password">
@@ -113,6 +127,11 @@ function InputWithLabel({ label, name, forgotPassword }) {
                 }
             </div>
             <div className="relative">
+                {helperText &&
+                    <p className='text-gray-12 text-[14px] leading-[16px] mb-1.5'>
+                        {helperText}
+                    </p>
+                }
                 <input type={name === "password" ? inputType : type(name)} className="w-full text-[14px] font-regular leading-[20px] text-gray-700 bg-gray-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 px-3 py-[10px]" id={name} name={name}
                     placeholder={placeholder(name)} autofocus />
                 {(name === "password" || name === "newPassword" || name === "confirmPassword") &&

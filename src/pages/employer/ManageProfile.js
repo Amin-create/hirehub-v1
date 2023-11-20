@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Breadcrumb } from '../../components/core';
+import { Core, Employer } from '../../components';
 
 const breadcrumb = [
     { label: "Dashboard", link: "/dashboard" },
@@ -7,6 +8,23 @@ const breadcrumb = [
 ];
 
 function ManageProfile() {
+    const [step, setStep] = useState(1);
+
+    const handleNext = () => {
+        if (step < 2) {
+            setStep(step + 1);
+        }
+    };
+
+    const handleBack = () => {
+        if (step >= 2) {
+            setStep(step - 1);
+        }
+    };
+
+    const handleFinish = () => {
+        // Handle finish logic
+    };
 
     return (
         <>
@@ -14,98 +32,59 @@ function ManageProfile() {
                 breadcrumb={breadcrumb}
             />
 
-            <div class="row">
-                <div class="col-xl form-card-wrapper">
-                    <div class="card mb-4">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Create an Employer Account</h5>
-                        </div>
-                        <div class="card-body">
-                            <form>
-                                <div class="mb-3">
-                                    <label class="form-label" for="company_name">Your company's
-                                        name<span class="text-danger"> *</span></label>
-                                    <input type="text" class="form-control" id="company_name" placeholder="Handmade" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="number_of_employees" class="form-label">Your company's
-                                        number of employees</label>
-                                    <select class="form-select" id="number_of_employees" aria-label="Default select example">
-                                        <option value="Open this select menu" selected>Open this select menu</option>
-                                        <option value="25">25</option>
-                                        <option value="200">200</option>
-                                        <option value="500">500</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="attachedPhoto" class="form-label">Attach Photo</label>
-                                    <input class="form-control" type="file" id="attachedPhoto" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="attachedVideo" class="form-label">Attach Video</label>
-                                    <input class="form-control" type="file" id="attachedVideo" />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label m-0" for="phone-no">Your Phone Number</label>
-                                    <small class="text-light-gray d-block">We will use this number to text you important
-                                        notifications</small>
-                                    <input type="text" id="phone-no" class="form-control phone-mask"
-                                        placeholder="+34 526 952 689" />
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                        <button type="submit" class="btn btn-primary btn-wider">Save And Continue </button>
-                    </div>
+            <div data-hs-stepper>
+                {/* steps */}
+                {/* <ul className="relative flex flex-row gap-x-2">
+                        {[1, 2, 3].map((index) => (
+                            <li
+                                key={index}
+                                className={`flex items-center gap-x-2 shrink basis-0 flex-1 group ${step === index ? 'active' : ''}`}
+                                data-hs-stepper-nav-item={`{"index": ${index}}`}
+                            >
+                                <span className="min-w-[28px] min-h-[28px] group inline-flex items-center text-xs align-middle">
+                                    <span className={`w-7 h-7 flex justify-center items-center flex-shrink-0 bg-gray-100 font-medium text-gray-800 rounded-full group-focus:bg-gray-200 dark:bg-gray-700 dark:text-white dark:group-focus:bg-gray-600 ${step === index ? 'hs-stepper-active:bg-blue-600 hs-stepper-active:text-white' : ''} ${step > index ? 'hs-stepper-success:bg-blue-600 hs-stepper-success:text-white' : ''}`}>
+                                        <span className={`${step > index ? 'hidden' : ''}`}>
+                                            {index}
+                                        </span>
+                                        <svg className={`${step > index ? 'block' : 'hidden'} flex-shrink-0 h-3 w-3 hs-stepper-success:block`} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
+                                    </span>
+                                    <span className="ms-2 text-sm font-medium text-gray-800">
+                                        Step {index}
+                                    </span>
+                                </span>
+                                <div className={`w-full h-px flex-1 bg-gray-200 group-last:hidden ${step > index ? 'hs-stepper-success:bg-blue-600' : 'hs-stepper-completed:bg-teal-600'}`}></div>
+                            </li>
+                        ))}
+                    </ul> */}
+                {/* content */}
+                {step === 1 &&
+                    <Employer.ManageProfile.Form1 />
+                }
+                {step === 2 &&
+                    <Employer.ManageProfile.Form2 />
+                }
+
+                <div className="mt-5 flex justify-start items-center gap-x-2">
+                    {step !== 1 &&
+                        <Core.Button
+                            onClick={handleBack}
+                            data-hs-stepper-back-btn
+                            type="narrow" color="white">Back</Core.Button>
+                    }
+                    {step !== 2 &&
+                        <Core.Button
+                            onClick={handleNext}
+                            type="narrow">Save and Continue</Core.Button>
+                    }
+                    {step === 2 &&
+                        <Core.Button
+                            onClick={handleFinish}
+                            type="narrow">Save</Core.Button>
+                    }
                 </div>
             </div>
-
-
-
-            2nd
-            2nd
-            2nd
-            2nd
-            2nd
-            2nd
-
-            <div class="row">
-                <div class="col-xl form-card-wrapper">
-                    <div class="card mb-4">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Create an Employer Account</h5>
-                        </div>
-                        <div class="card-body">
-                            <form>
-
-                                <div class="mb-3">
-                                    <label for="number_of_employees" class="form-label">Your company's name*</label>
-                                    <select class="form-select" id="number_of_employees" aria-label="Default select example">
-                                        <option selected>Select an option</option>
-                                        <option value="option1">option1</option>
-                                        <option value="option2">option2</option>
-                                        <option value="option3">option3</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label m-0" for="description">Description</label>
-                                    <textarea name="description" id="description" class="form-control" rows="5"
-                                        placeholder="Decribe here"></textarea>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-start align-items-center gap-2 py-3">
-                        <button type="button" class="btn btn-outline-dark">Back</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </div>
-            </div>
-
-
-
         </>
     );
 }
