@@ -8,6 +8,7 @@ import {
   ManageProfile,
   RegisterPage,
   EmployerDashboard,
+  ApprovedEmployers,
 } from "./pages/index";
 import { AdminLayout, EmployerLayout } from "./components";
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="manage-employers" element={<ManageEmployers />} />
           <Route path="manage-candidates" element={<ManageCandidates />} />
+          <Route path="approved-employees" element={<ApprovedEmployers />} />
         </Route>
 
         <Route path="employer/" element={<EmployerLayout />} >
